@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet: ["6.0", "8.0"] # ${{ fromJson(github.event.inputs.dotnetVersions) }}
+        dotnet: ${{ github.event.inputs.dotnetVersions }}
     steps:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
