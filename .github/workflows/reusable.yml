@@ -13,7 +13,7 @@ jobs:
       matrix:
         dotnet: ${{ fromJSON(inputs.dotnetVersions) }}
     steps:
-      # - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet }}

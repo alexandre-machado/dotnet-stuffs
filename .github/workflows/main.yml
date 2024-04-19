@@ -12,23 +12,6 @@ jobs:
   call-workflow:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Get all .csproj files
-        run: |
-          json="[]"
-
-          # Busca todos os arquivos .csproj recursivamente
-          for file in $(find . -name "*.csproj")
-          do
-              # Adiciona o caminho do arquivo ao JSON
-              json=$(echo $json | jq --arg file "$file" '. + [$file]')
-          done
-          
-          # Converte o JSON para string e imprime
-          json_as_string=$(echo $json | jq -r tostring)
-          echo "paths=$json_as_string" >> "$GITHUB_OUTPUT"
-          echo $json_as_string
 
       - uses: ./.github/workflows/reusable.yml
         with:
