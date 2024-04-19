@@ -10,10 +10,6 @@ on:
 
 jobs:
   call-workflow:
-    runs-on: ubuntu-latest
-    steps:
-
-      - uses: ./.github/workflows/reusable.yml
-        with:
-          dotnetVersions: '["6.0.x", "8.0.x"]'
-          # projectPaths: '["./AllGenericThings/AllGenericThings.csproj","./MaxDegreeOfParallelism/dotnet-stuffs.csproj"]'
+    uses: ./.github/workflows/reusable.yml
+    with:
+      dotnetVersions: '["6.0.x", "8.0.x"]'
