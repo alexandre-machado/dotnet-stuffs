@@ -22,8 +22,8 @@ jobs:
           
           # Converte o JSON para string e imprime
           json_as_string=$(echo $json | jq -r tostring)
-          echo $json_as_string
           echo "paths=$json_as_string" >> "$GITHUB_OUTPUT"
+          echo $json_as_string
 
       - uses: ./.github/workflows/reusable.yml
         with:
