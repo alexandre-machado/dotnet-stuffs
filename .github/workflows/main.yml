@@ -7,8 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Get all .csproj files
-        id: csproj-files
+        id: files
         run: |
           json="[]"
 
