@@ -14,6 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Get all .csproj files
+        id: csproj-files
         run: |
           json="[]"
 
@@ -27,7 +28,8 @@ jobs:
           # Converte o JSON para string e imprime
           json_as_string=$(echo $json | jq -r tostring)
           echo $json_as_string
+          echo "json_as_string=$json_as_string" >> "$GITHUB_OUTPUT"
       - uses: ./.github/workflows/reusable.yml
         with:
           dotnetVersions: '["6.0.x", "8.0.x"]'
-          projectPaths: $json_as_string
+          projectPaths: ${{ steps.csproj-files.outputs.json_as_string }}
