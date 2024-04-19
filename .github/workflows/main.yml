@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Get all .csproj files
-        id: files
+        # id: files
         run: |
           json="[]"
 
