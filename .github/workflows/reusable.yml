@@ -3,8 +3,8 @@ on:
   workflow_call:
     inputs:
       dotnetVersions:
+        required: true
         type: string
-        default: '["3.1", "5.0", "6.0"]'
 
 jobs:
   build:
