@@ -12,4 +12,4 @@ jobs:
   call-workflow:
     uses: ./.github/workflows/reusable.yml
     with:
-      dotnetVersions: '["6.x", "8.x"]'
+      dotnetVersions: '["6.0.x", "8.0.x"]'
