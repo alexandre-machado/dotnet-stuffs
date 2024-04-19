@@ -5,6 +5,9 @@ on:
       dotnetVersions:
         required: true
         type: string
+      projectPaths:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -12,10 +15,12 @@ jobs:
     strategy:
       matrix:
         dotnet: ${{ fromJSON(inputs.dotnetVersions) }}
+        project: ${{ fromJSON(inputs.projectPaths) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Build
-        run: dotnet build
+        if : ${{ matrix.project != '' }}
+        run: dotnet build ${{ matrix.project }}

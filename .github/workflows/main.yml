@@ -9,7 +9,33 @@ on:
       - main
 
 jobs:
+  get-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      paths: ${{ steps.get-matrix.outputs.paths }}
+    steps:
+      - name: Get csproj files
+        id: get-matrix
+        run: |
+          json="[]"
+
+          # Busca todos os arquivos .csproj recursivamente
+          for file in $(find . -name "*.csproj")
+          do
+              # Adiciona o caminho do arquivo ao JSON
+              json=$(echo $json | jq --arg file "$file" '. + [$file]')
+          done
+
+          # Converte o JSON para string e imprime
+          json_as_string=$(echo $json | jq -r tostring)
+
+          echo "paths=$json_as_string" >> "$GITHUB_OUTPUT"
+          echo $json_as_string
+
   call-workflow:
+    needs: get-matrix
     uses: ./.github/workflows/reusable.yml
     with:
       dotnetVersions: '["6.0.x", "8.0.x"]'
+      projectPaths: '${{ needs.get-matrix.outputs.paths }}'
+
