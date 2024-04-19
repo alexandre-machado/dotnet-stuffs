@@ -1,12 +1,6 @@
 name: Main workflow
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push]
 
 jobs:
   call-workflow:
@@ -28,7 +22,7 @@ jobs:
           # Converte o JSON para string e imprime
           json_as_string=$(echo $json | jq -r tostring)
           echo $json_as_string
-          echo "json_as_string=$json_as_string" >> "$GITHUB_OUTPUT"
+          echo "paths=$json_as_string" >> "$GITHUB_OUTPUT"
 
       - uses: ./.github/workflows/reusable.yml
         with:
