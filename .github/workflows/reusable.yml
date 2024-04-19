@@ -15,10 +15,11 @@ jobs:
     strategy:
       matrix:
         dotnet: ${{ fromJSON(inputs.dotnetVersions) }}
+        path: ${{ fromJSON(inputs.projectPaths) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Build
-        run: dotnet build ${{ inputs.projectPaths }}
+        run: dotnet build ${{ matrix.path }}
