@@ -5,9 +5,9 @@ on:
       dotnetVersions:
         required: true
         type: string
-      projectPaths:
-        required: true
-        type: string
+      # projectPaths:
+      #   required: true
+      #   type: string
 
 jobs:
   build:
