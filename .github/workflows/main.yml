@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Get all .csproj files
         run: |
-          json: []
+          json="[]"
 
           # Busca todos os arquivos .csproj recursivamente
           for file in $(find . -name "*.csproj")
