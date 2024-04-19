@@ -12,10 +12,10 @@ jobs:
   get-matrix:
     runs-on: ubuntu-latest
     outputs:
-      paths: ${{ steps.get-matrix.outputs.paths }}
+      paths: ${{ steps.csproj-files.outputs.paths }}
     steps:
       - name: Get csproj files
-        id: get-matrix
+        id: csproj-files
         run: |
           json="[]"
 
@@ -29,8 +29,8 @@ jobs:
           # Converte o JSON para string e imprime
           json_as_string=$(echo $json | jq -r tostring)
 
-          echo "paths=$json_as_string" >> "$GITHUB_OUTPUT"
           echo $json_as_string
+          echo "paths=$json_as_string" >> "$GITHUB_OUTPUT"
 
   call-workflow:
     needs: get-matrix
