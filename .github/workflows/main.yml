@@ -10,6 +10,23 @@ on:
 
 jobs:
   call-workflow:
-    uses: ./.github/workflows/reusable.yml
-    with:
-      dotnetVersions: '["6.0.x", "8.0.x"]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get all .csproj files
+        run: |
+          json: []
+
+          # Busca todos os arquivos .csproj recursivamente
+          for file in $(find . -name "*.csproj")
+          do
+              # Adiciona o caminho do arquivo ao JSON
+              json=$(echo $json | jq --arg file "$file" '. + [$file]')
+          done
+          
+          # Converte o JSON para string e imprime
+          json_as_string=$(echo $json | jq -r tostring)
+          echo $json_as_string
+      - uses: ./.github/workflows/reusable.yml
+        with:
+          dotnetVersions: '["6.0.x", "8.0.x"]'
+          projectPaths: $json_as_string

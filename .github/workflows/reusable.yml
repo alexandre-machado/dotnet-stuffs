@@ -5,6 +5,9 @@ on:
       dotnetVersions:
         required: true
         type: string
+      projectPaths:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -18,4 +21,4 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Build
-        run: dotnet build --configuration Release
+        run: dotnet build ${{ inputs.projectPaths }}
