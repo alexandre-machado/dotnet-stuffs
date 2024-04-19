@@ -13,9 +13,9 @@ jobs:
       matrix:
         dotnet: ${{ fromJSON(inputs.dotnetVersions) }}
     steps:
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ matrix.dotnet }}
-    - name: Build
-      run: dotnet build --configuration Release
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - name: Build
+        run: dotnet build --configuration Release
