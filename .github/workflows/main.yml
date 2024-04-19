@@ -14,6 +14,7 @@ jobs:
     outputs:
       paths: ${{ steps.csproj-files.outputs.paths }}
     steps:
+      - uses: actions/checkout@v4
       - name: Get csproj files
         id: csproj-files
         run: |
@@ -37,5 +38,5 @@ jobs:
     uses: ./.github/workflows/reusable.yml
     with:
       dotnetVersions: '["6.0.x", "8.0.x"]'
-      projectPaths: '${{ needs.get-matrix.outputs.paths }}'
+      projectPaths: ${{ needs.get-matrix.outputs.paths }}
 
