@@ -1,0 +1,15 @@
+name: Main workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  call-workflow:
+    uses: ./.github/workflows/reusable.yml
+    with:
+      dotnetVersions: '["6.0", "8.0"]'

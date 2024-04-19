@@ -1,0 +1,21 @@
+name: Matrix from Input Example
+on: 
+  workflow_call:
+    inputs:
+      dotnetVersions:
+        type: string
+        default: '["3.1", "5.0", "6.0"]'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: ${{fromJson(github.event.inputs.dotnetVersions)}}
+    steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.dotnet }}
+    - name: Build
+      run: dotnet build --configuration Release
